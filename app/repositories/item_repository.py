@@ -1,0 +1,40 @@
+from typing import List
+from app.db.database import SessionLocal
+from app.db.item_db import Item
+#from app.models.item import Item
+
+
+class ItemRepository:
+    async def get_items(self) -> List:
+        with SessionLocal() as session:
+            return session.query(Item).all()
+
+    def get_item_by_id(self, item_id: int):
+        with SessionLocal() as session:
+            return session.query(Item).filter(Item.id == item_id).first()
+
+    def create_item(self, item: Item):
+        with SessionLocal() as session:
+            session.add(item)
+            session.commit()
+            session.refresh(item)
+            return item
+
+    def update_item(self, item_id: int, item: Item):
+        with SessionLocal() as session:
+            db_item: Item = session.query(Item).filter(Item.id == item_id).first()
+            db_item.name = item.name
+            db_item.price = item.price
+            db_item.purchase_date = item.purchase_date
+            db_item.purchase_date = item.purchase_date
+            db_item.tax = item.tax
+            db_item.location = item.location
+            db_item.expiration_date = item.expiration_date
+            session.commit()
+            session.refresh(db_item)
+            return db_item
+
+    def delete_item(self, item_id: int) -> None:
+        with SessionLocal() as session:
+            session.query(Item).filter(Item.id == item_id).delete()
+            session.commit()

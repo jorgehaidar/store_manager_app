@@ -1,5 +1,5 @@
+from datetime import date
 from pydantic import BaseModel
-from datetime import datetime
 
 
 class Item(BaseModel):
@@ -7,7 +7,8 @@ class Item(BaseModel):
     name: str
     price: float
     purchase_price: float
-    purchase_date: datetime
+    purchase_date: date
     tax: float
     location: str
-    expiration_date: datetime
+    expiration_date: date
+
