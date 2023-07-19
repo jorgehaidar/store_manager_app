@@ -1,14 +1,19 @@
-from datetime import date
-from pydantic import BaseModel
+from datetime import datetime
+from sqlalchemy import Column, Integer, String, Float, DATE
+from sqlalchemy.orm import Mapped, mapped_column, mapper
+from app.db.database import Base
+from app.schema.item_schema import ItemSchema
 
 
-class Item(BaseModel):
-    id: int
-    name: str
-    price: float
-    purchase_price: float
-    purchase_date: date
-    tax: float
-    location: str
-    expiration_date: date
+class Item(Base):
+    __tablename__ = "items"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String)
+    price: Mapped[float] = mapped_column(Float)
+    purchase_price: Mapped[float] = mapped_column(Float)
+    #purchase_date: Mapped[datetime] = mapped_column(DATE)
+    tax: Mapped[float] = mapped_column(Float)
+    location: Mapped[str] = mapped_column(String)
+    #expiration_date: Mapped[datetime] = mapped_column(DATE)
 
