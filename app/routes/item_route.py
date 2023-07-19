@@ -3,6 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends
 from app.schema.item_schema import ItemSchema
 from app.repositories.item_repository import ItemRepository
+from app.services.item_service import ItemService
 
 router = APIRouter()
 
