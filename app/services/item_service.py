@@ -3,6 +3,7 @@ from typing import List
 from app.models.item import Item
 from app.schema.item_schema import ItemSchema
 from app.repositories.item_repository import ItemRepository
+from app.mappers.item_mapper import ItemMapper
 
 
 class ItemService:
@@ -17,7 +18,8 @@ class ItemService:
         return self.item_repository.get_item_by_id(item_id)
 
     def create_item(self, item: ItemSchema) -> Item:
-        return self.item_repository.create_item(item)
+        item_db = Item(**ItemMapper.to_db(item))
+        return self.item_repository.create_item(item_db)
 
     def update_item(self, item_id: int, item: ItemSchema) -> Item:
         return self.item_repository.update_item(item_id, item)

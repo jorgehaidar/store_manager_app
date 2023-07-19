@@ -14,13 +14,12 @@ class ItemRepository:
         with SessionLocal() as session:
             return session.query(Item).filter(Item.id == item_id).first()
 
-    def create_item(self, item: ItemSchema):
+    def create_item(self, item: Item):
         with SessionLocal() as session:
-            db_item = Item(**ItemMapper.to_db(item))
-            session.add(db_item)
+            session.add(item)
             session.commit()
-            session.refresh(db_item)
-            return db_item
+            session.refresh(item)
+            return item
 
     def update_item(self, item_id: int, item: ItemSchema):
         with SessionLocal() as session:
