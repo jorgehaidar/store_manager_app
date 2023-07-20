@@ -2,20 +2,20 @@
 Project of practice with FastAPI Python
 ***
 ## Descripcion
-En el proyecto se definen 3 modelos `item`, `client` y `sales` que estan involucradas en la gestion y venta de una tienda
+En el proyecto se definen 3 modelos `item`, `client` y `sale` que estan involucradas en la gestion y venta de una tienda
 ***
 ## Modelos
 
-| `item`                        | `client`               | `sales`                |
-|:----------------------------|:---------------------|:-----------------------|
-| `id` -> int                   | `id` -> int            | `id` -> int            |
+| `item`                        | `client`               | `sale`                  |
+|:----------------------------|:---------------------|:------------------------|
+| `id` -> int                   | `id` -> int            | `id` -> int             |
 | `name` -> str                 | `name` -> str          | `id_item` -> int        |
-| `price` -> float              | `identity_card` -> str | `id_client` -> int       |
-| `purchase_price` -> float     | `phone` -> str         | `amount` -> int          |
-| `purchase_date` -> datetime   | `credit_card` -> str   | `sale_date` -> datetime  |
-| `tax` -> float                | `debt` -> float        |                        |
-| `location` -> str             |                      |                        |
-| `expiration_date` -> datetime |                      |                        |
+| `price` -> float              | `identity_card` -> str | `id_client` -> int      |
+| `purchase_price` -> float     | `phone` -> str         | `amount` -> int         |
+| `purchase_date` -> datetime   | `credit_card` -> str   | `sale_date` -> datetime |
+| `tax` -> float                | `debt` -> float        |                         |
+| `location` -> str             |                      |                         |
+| `expiration_date` -> datetime |                      |                         |
 
 ### Description de Modelos
 
@@ -37,7 +37,7 @@ En el proyecto se definen 3 modelos `item`, `client` y `sales` que estan involuc
 * `credit_card`: tarjeta de credito del client
 * `debt`: cantidad que debe a la tienda
 
-#### **sales:**
+#### **sale:**
 * `id`: identificador unico del client, autoincremental
 * `id_item`: llave foranea al item de la compra
 * `id_client`: llave foranea al client de la compra
@@ -62,9 +62,9 @@ En el proyecto se definen 3 modelos `item`, `client` y `sales` que estan involuc
 4. `[PUT]` /clients/{clients_id} -> Hace update de los atributos del objeto `Client` con id correspondiente a `client_id`, los valores de update llegan a traves del body en forma de json 
 5. `[DELETE]` /clients/{clients_id} -> Elimina el objeto de tipo `Client` con id correspondiente a `client_id`
 
-### Sales
+### Sale
 1. `[GET]` /sales -> Devuelve todos los clients almacenados
-2. `[GET]` /sales/{sales_id} -> Devuelve el `Sales` correspondiente al valor del `sales_id`
-3. `[POST]` /sales -> Crea un nuevo objeto de tipo `Sales` y lo almacena en la DB los datos del `Sales` llegan a traves del body en forma de json 
-4. `[PUT]` /sales/{sales_id} -> Hace update de los atributos del objeto `Sales` con id correspondiente a `sales_id`, los valores de update llegan a traves del body en forma de json 
-5. `[DELETE]` /sales/{sales_id} -> Elimina el objeto de tipo `Sales` con id correspondiente a `sales_id`
+2. `[GET]` /sales/{sales_id} -> Devuelve el `Sale` correspondiente al valor del `sale_id`
+3. `[POST]` /sales -> Crea un nuevo objeto de tipo `Sale` y lo almacena en la DB los datos del `Sale` llegan a traves del body en forma de json 
+4. `[PUT]` /sales/{sales_id} -> Hace update de los atributos del objeto `Sale` con id correspondiente a `sale_id`, los valores de update llegan a traves del body en forma de json 
+5. `[DELETE]` /sales/{sales_id} -> Elimina el objeto de tipo `Sale` con id correspondiente a `sale_id`
