@@ -12,6 +12,9 @@ class ItemSchema(BaseModel):
     location: str
     #expiration_date: date
 
+    # TODO: Add the column purchase_date
+    # TODO: Add the column purchase_date
+
     class Config:
         orm_mode = True
 

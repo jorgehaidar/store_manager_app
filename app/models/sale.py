@@ -14,3 +14,6 @@ class Sale(Base):
     amount: Mapped[int] = mapped_column(Integer)
     sale_date: Mapped[datetime] = mapped_column(DATETIME)
 
+    # TODO: Add relation to table client
+    # TODO: Add relation to table item
+

@@ -17,3 +17,5 @@ class Item(Base):
     location: Mapped[str] = mapped_column(String)
     #expiration_date: Mapped[datetime] = mapped_column(DATE)
 
+    # TODO: Add the column purchase_date
+    # TODO: Add the column expiration_date

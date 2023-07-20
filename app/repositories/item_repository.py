@@ -21,6 +21,7 @@ class ItemRepository:
             session.refresh(item)
             return item
 
+
     def update_item(self, item_id: int, item: ItemSchema):
         with SessionLocal() as session:
             db_item: Item = session.query(Item).filter(Item.id == item_id).first()
@@ -31,6 +32,7 @@ class ItemRepository:
             db_item.tax = item.tax
             db_item.location = item.location
             db_item.expiration_date = item.expiration_date
+            # TODO: fix update_client functionality
             session.commit()
             session.refresh(db_item)
             return db_item

@@ -36,6 +36,7 @@ class SaleRepository:
             session.refresh(db_item)
             return db_item
             """
+            # TODO: fix update_client functionality
             pass
 
     def delete_sale(self, sale_id: int) -> None:
