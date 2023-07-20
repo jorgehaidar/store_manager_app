@@ -19,7 +19,7 @@ class ClientService:
 
     def create_client(self, client: ClientSchema) -> Client:
         client_db = Client(**ClientMapper.to_db(client))
-        return self.client_repository.create_item(client_db)
+        return self.client_repository.create_client(client_db)
 
     def update_client(self, client_id: int, client: ClientSchema) -> Client:
         return self.client_repository.update_client(client_id, client)
