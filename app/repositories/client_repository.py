@@ -4,7 +4,7 @@ from app.models.client import Client
 from app.schema.client_schema import ClientSchema
 from app.mappers.client_mapper import ClientMapper
 
-
+# TODO: change the input and output object to ItemSchema
 class ClientRepository:
     async def get_clients(self) -> List:
         with SessionLocal() as session:

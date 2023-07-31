@@ -7,10 +7,12 @@ from app.services.item_service import ItemService
 
 router = APIRouter()
 
+item_service = ItemService(ItemRepository)
+
 
 @router.get("/items")
-async def read_items(item_repository: ItemRepository = Depends()):
-    return await item_repository.get_items()
+async def read_items():
+    return await item_service.get_items()
 
 
 @router.get("/items/{item_id}", response_model=ItemSchema)

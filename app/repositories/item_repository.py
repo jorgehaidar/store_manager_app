@@ -35,7 +35,7 @@ class ItemRepository:
             # TODO: fix update_client functionality
             session.commit()
             session.refresh(db_item)
-            return db_item
+            return item
 
     def delete_item(self, item_id: int) -> None:
         with SessionLocal() as session:

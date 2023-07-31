@@ -5,6 +5,7 @@ from app.schema.sale_schema import SaleSchema
 from app.mappers.sale_mapper import SaleMapper
 
 
+# TODO: change the input and output object to ItemSchema
 class SaleRepository:
     async def get_sales(self) -> List:
         with SessionLocal() as session:
