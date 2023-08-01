@@ -32,8 +32,10 @@ async def create_client(client: ClientSchema, db: Session = Depends(get_db)):
 
 
 @router.put("/clients/{client_id}", response_model=ClientSchema)
-async def update_client(client_id: int, client: ClientSchema, client_repository: ClientRepository = Depends()):
-    return client_repository.update_client(client_id=client_id, client=client)
+async def update_client(client_id: int, client: ClientSchema, db: Session = Depends(get_db)):
+    client_repository = ClientRepository(db)
+    client_service = ClientService(client_repository)
+    return client_service.update_client(client_id=client_id, client=client)
 
 
 @router.delete("/clients/{client_id}")
