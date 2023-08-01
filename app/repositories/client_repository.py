@@ -23,22 +23,26 @@ class ClientRepository:
         return client
 
     def update_client(self, client_id: int, client: ClientSchema):
-        with SessionLocal() as session:
-            """
-            db_item: Item = session.query(Item).filter(Item.id == item_id).first()
-            db_item.name = item.name
-            db_item.price = item.price
-            db_item.purchase_price = item.purchase_price
-            db_item.purchase_date = item.purchase_date
-            db_item.tax = item.tax
-            db_item.location = item.location
-            db_item.expiration_date = item.expiration_date
-            session.commit()
-            session.refresh(db_item)
-            return db_item
-            """
-            # TODO: fix update_client functionality
-            pass
+        db_client: Client = self.db.query(Client).filter(Client.id == client_id).first()
+
+        if client.name != None:
+            db_client.name = client.name
+
+        if client.identity_card != None:
+            db_client.identity_card = client.identity_card
+
+        if client.phone != None:
+            db_client.phone = client.phone
+
+        if client.credit_card != None:
+            db_client.credit_card = client.credit_card
+
+        if client.debt != None:
+            db_client.debt = client.debt
+
+        self.db.commit()
+        self.db.refresh(db_client)
+        return db_client
 
     def delete_item(self, client_id: int) -> None:
         with SessionLocal() as session:
