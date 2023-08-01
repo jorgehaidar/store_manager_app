@@ -15,8 +15,7 @@ class SaleRepository:
         return self.db.query(Sale).all()
 
     def get_sale_by_id(self, sale_id: int):
-        with SessionLocal() as session:
-            return session.query(Sale).filter(Sale.id == sale_id).first()
+        return self.db.query(Sale).filter(Sale.id == sale_id).first()
 
     def create_sale(self, sale: Sale):
         with SessionLocal() as session:
