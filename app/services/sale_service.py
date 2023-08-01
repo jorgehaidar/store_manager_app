@@ -17,12 +17,13 @@ class SaleService:
     def get_sale_by_id(self, sale_id: int) -> SaleSchema:
         return self.sale_repository.get_sale_by_id(sale_id)
 
-    def create_sale(self, sale: SaleSchema) -> Sale:
+    def create_sale(self, sale: SaleSchema) -> SaleSchema:
         sale_db = sale(**SaleMapper.to_db(sale))
         return self.sale_repository.create_sale(sale_db)
 
-    def update_sale(self, sale_id: int, sale: SaleSchema) -> Sale:
-        return self.sale_repository.update_sale(sale_id, sale)
+    def update_sale(self, sale_id: int, sale: SaleSchema) -> SaleSchema:
+        db_sale: Sale = self.sale_repository.update_sale(sale_id, sale)
+        return SaleMapper.to_entity(db_sale)
 
     def delete_sale(self, sale_id: int) -> None:
         return self.sale_repository.delete_sale(sale_id)
