@@ -23,12 +23,14 @@ async def read_item(item_id: int, db: Session = Depends(get_db)):
     item_service = ItemService(item_repository)
     return item_service.get_item_by_id(item_id=item_id)
 
-#
-# @router.post("/items", response_model=ItemSchema)
-# async def create_item(item: ItemSchema, item_repository: ItemRepository = Depends()):
-#     return item_repository.create_item(item=item)
-#
-#
+
+@router.post("/items")
+async def create_item(item: ItemSchema, db: Session = Depends(get_db)):
+    item_repository = ItemRepository(db)
+    item_service = ItemService(item_repository)
+    return item_service.create_item(item=item)
+
+
 # @router.put("/items/{item_id}", response_model=ItemSchema)
 # async def update_item(item_id: int, item: ItemSchema, item_repository: ItemRepository = Depends()):
 #     return item_repository.update_item(item_id=item_id, item=item)
