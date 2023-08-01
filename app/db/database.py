@@ -6,3 +6,11 @@ SQLALCHEMY_DATABASE_URL = "postgresql://postgres:admin@localhost:5432/store_mana
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(engine)
 Base = declarative_base()
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
