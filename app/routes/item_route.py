@@ -38,7 +38,9 @@ async def update_item(item_id: int, item: ItemSchema, db: Session = Depends(get_
     return item_service.update_item(item_id=item_id, item=item)
 
 
-# @router.delete("/items/{item_id}")
-# async def delete_item(item_id: int, item_repository: ItemRepository = Depends()):
-#     item_repository.delete_item(item_id=item_id)
-#     return {"message": "Item deleted successfully."}
+@router.delete("/items/{item_id}")
+async def delete_item(item_id: int, db: Session = Depends(get_db)):
+    item_repository = ItemRepository(db)
+    item_service = ItemService(item_repository)
+    item_service.delete_item(item_id=item_id)
+    return {"message": "Item deleted successfully."}
