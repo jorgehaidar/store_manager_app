@@ -14,8 +14,7 @@ class ClientRepository:
         return self.db.query(Client).all()
 
     def get_client_by_id(self, client_id: int):
-        with SessionLocal() as session:
-            return session.query(Client).filter(Client.id == client_id).first()
+        return self.db.query(Client).filter(Client.id == client_id).first()
 
     def create_client(self, client: Client):
         with SessionLocal() as session:
