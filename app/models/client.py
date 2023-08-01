@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float, DATE
-from sqlalchemy.orm import Mapped, mapped_column, mapper
+from sqlalchemy.orm import Mapped, mapped_column, mapper, relationship
 from app.db.database import Base
 
 
@@ -12,4 +12,5 @@ class Client(Base):
     phone: Mapped[str] = mapped_column(String)
     credit_card: Mapped[str] = mapped_column(String)
     debt: Mapped[float] = mapped_column(Float)
+    sale = relationship('Sale', uselist=False)
 
