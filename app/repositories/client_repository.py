@@ -17,11 +17,10 @@ class ClientRepository:
         return self.db.query(Client).filter(Client.id == client_id).first()
 
     def create_client(self, client: Client):
-        with SessionLocal() as session:
-            session.add(client)
-            session.commit()
-            session.refresh(client)
-            return client
+        self.db.add(client)
+        self.db.commit()
+        self.db.refresh(client)
+        return client
 
     def update_client(self, client_id: int, client: ClientSchema):
         with SessionLocal() as session:
