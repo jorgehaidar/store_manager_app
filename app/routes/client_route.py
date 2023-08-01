@@ -24,9 +24,11 @@ async def read_client(client_id: int, db: Session = Depends(get_db)):
     return client_service.get_client_by_id(client_id=client_id)
 
 
-@router.post("/clients", response_model=ClientSchema)
-async def create_client(client: ClientSchema, client_repository: ClientRepository = Depends()):
-    return client_repository.create_client(client=client)
+@router.post("/clients")
+async def create_client(client: ClientSchema, db: Session = Depends(get_db)):
+    client_repository = ClientRepository(db)
+    client_service = ClientService(client_repository)
+    return client_service.create_client(client=client)
 
 
 @router.put("/clients/{client_id}", response_model=ClientSchema)
