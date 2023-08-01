@@ -19,6 +19,7 @@ class ItemRepository:
         return self.db.query(Item).filter(Item.id == item_id).first()
 
     def create_item(self, item: ItemSchema):
+        #TODO: arreglar el atributo que recibe ItemSchema -> Item
         self.db.add(item)
         self.db.commit()
         self.db.refresh(item)
@@ -30,7 +31,7 @@ class ItemRepository:
         #     session.refresh(item_db)
         #     return item
 
-    def update_item(self, item_id: int, item: ItemSchema):
+    def update_item(self, item_id: int, item: Item):
         db_item: Item = self.db.query(Item).filter(Item.id == item_id).first()
 
         if item.name != None:
