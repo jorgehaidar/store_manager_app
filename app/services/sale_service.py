@@ -18,7 +18,7 @@ class SaleService:
         return self.sale_repository.get_sale_by_id(sale_id)
 
     def create_sale(self, sale: SaleSchema) -> SaleSchema:
-        sale_db = sale(**SaleMapper.to_db(sale))
+        sale_db = Sale(**SaleMapper.to_db(sale))
         return self.sale_repository.create_sale(sale_db)
 
     def update_sale(self, sale_id: int, sale: SaleSchema) -> SaleSchema:
