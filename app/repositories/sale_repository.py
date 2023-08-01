@@ -18,11 +18,10 @@ class SaleRepository:
         return self.db.query(Sale).filter(Sale.id == sale_id).first()
 
     def create_sale(self, sale: Sale):
-        with SessionLocal() as session:
-            session.add(sale)
-            session.commit()
-            session.refresh(sale)
-            return sale
+        self.db.add(sale)
+        self.db.commit()
+        self.db.refresh(sale)
+        return sale
 
     def update_sale(self, sale_id: int, sale: SaleSchema):
         with SessionLocal() as session:
