@@ -39,6 +39,8 @@ async def update_client(client_id: int, client: ClientSchema, db: Session = Depe
 
 
 @router.delete("/clients/{client_id}")
-async def delete_client(client_id: int, client_repository: ClientRepository = Depends()):
-    client_repository.delete_client(client_id=client_id)
+async def delete_client(client_id: int, db: Session = Depends(get_db)):
+    client_repository = ClientRepository(db)
+    client_service = ClientService(client_repository)
+    client_service.delete_client(client_id=client_id)
     return {"message": "Client deleted successfully."}
