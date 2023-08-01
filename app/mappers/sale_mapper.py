@@ -1,4 +1,5 @@
 from app.schema.sale_schema import SaleSchema
+from app.models.sale import Sale
 
 
 class SaleMapper:
@@ -8,5 +9,12 @@ class SaleMapper:
         return sale.dict()
 
     @staticmethod
-    def to_entity(sale: dict) -> SaleSchema:
-        return SaleSchema(**sale)
+    def to_entity(sale: Sale) -> SaleSchema:
+        sale_dict = {
+            'id': sale.id,
+            'id_item': sale.id_item,
+            'id_client': sale.id_client,
+            'amount': sale.amount,
+            'sale_date': sale.amount
+        }
+        return SaleSchema(**sale_dict)
