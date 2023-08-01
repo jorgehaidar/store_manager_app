@@ -43,6 +43,5 @@ class SaleRepository:
         return db_sale
 
     def delete_sale(self, sale_id: int) -> None:
-        with SessionLocal() as session:
-            session.query(Sale).filter(Sale.id == sale_id).delete()
-            session.commit()
+        self.db.query(Sale).filter(Sale.id == sale_id).delete()
+        self.db.commit()
