@@ -21,12 +21,16 @@ class ItemRepository:
         #    return session.query(Item).filter(Item.id == item_id).first()
 
     def create_item(self, item: ItemSchema):
-        with SessionLocal() as session:
-            item_db = Item(**ItemMapper.to_db(item))
-            session.add(item_db)
-            session.commit()
-            session.refresh(item_db)
-            return item
+        self.db.add(item)
+        self.db.commit()
+        self.db.refresh(item)
+        return item
+        # with SessionLocal() as session:
+        #     item_db = Item(**ItemMapper.to_db(item))
+        #     session.add(item_db)
+        #     session.commit()
+        #     session.refresh(item_db)
+        #     return item
 
     def update_item(self, item_id: int, item: ItemSchema):
         with SessionLocal() as session:
