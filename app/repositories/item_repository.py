@@ -33,19 +33,22 @@ class ItemRepository:
         #     return item
 
     def update_item(self, item_id: int, item: ItemSchema):
-        with SessionLocal() as session:
-            db_item: Item = session.query(Item).filter(Item.id == item_id).first()
-            db_item.name = item.name
-            db_item.price = item.price
-            db_item.purchase_price = item.purchase_price
-            db_item.purchase_date = item.purchase_date
-            db_item.tax = item.tax
-            db_item.location = item.location
-            db_item.expiration_date = item.expiration_date
-            # TODO: fix update_client functionality
-            session.commit()
-            session.refresh(db_item)
-            return item
+        self.db.commit()
+        self.db.refresh(item)
+        return item
+        # with SessionLocal() as session:
+        #     db_item: Item = session.query(Item).filter(Item.id == item_id).first()
+        #     db_item.name = item.name
+        #     db_item.price = item.price
+        #     db_item.purchase_price = item.purchase_price
+        #     db_item.purchase_date = item.purchase_date
+        #     db_item.tax = item.tax
+        #     db_item.location = item.location
+        #     db_item.expiration_date = item.expiration_date
+        #     # TODO: fix update_client functionality
+        #     session.commit()
+        #     session.refresh(db_item)
+        #     return item
 
     def delete_item(self, item_id: int) -> None:
         with SessionLocal() as session:
