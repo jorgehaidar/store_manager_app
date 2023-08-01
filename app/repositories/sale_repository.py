@@ -3,13 +3,16 @@ from app.db.database import SessionLocal
 from app.models.sale import Sale
 from app.schema.sale_schema import SaleSchema
 from app.mappers.sale_mapper import SaleMapper
+from sqlalchemy.orm import Session
 
 
 # TODO: change the input and output object to ItemSchema
 class SaleRepository:
+    def __init__(self, db: Session):
+        self.db = db
+
     async def get_sales(self) -> List:
-        with SessionLocal() as session:
-            return session.query(Sale).all()
+        return self.db.query(Sale).all()
 
     def get_sale_by_id(self, sale_id: int):
         with SessionLocal() as session:
