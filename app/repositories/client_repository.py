@@ -3,12 +3,15 @@ from app.db.database import SessionLocal
 from app.models.client import Client
 from app.schema.client_schema import ClientSchema
 from app.mappers.client_mapper import ClientMapper
+from sqlalchemy.orm import Session
 
 # TODO: change the input and output object to ItemSchema
 class ClientRepository:
+    def __init__(self, db: Session):
+        self.db = db
+
     async def get_clients(self) -> List:
-        with SessionLocal() as session:
-            return session.query(Client).all()
+        return self.db.query(Client).all()
 
     def get_client_by_id(self, client_id: int):
         with SessionLocal() as session:
