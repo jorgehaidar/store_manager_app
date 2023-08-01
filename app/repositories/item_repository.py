@@ -16,9 +16,7 @@ class ItemRepository:
         #    return session.query(Item).all()
 
     def get_item_by_id(self, item_id: int):
-        return self.db.query(Item).filter(Item.id == id).first()
-        #with SessionLocal() as session:
-        #    return session.query(Item).filter(Item.id == item_id).first()
+        return self.db.query(Item).filter(Item.id == item_id).first()
 
     def create_item(self, item: ItemSchema):
         self.db.add(item)
