@@ -23,23 +23,24 @@ class SaleRepository:
         self.db.refresh(sale)
         return sale
 
-    def update_sale(self, sale_id: int, sale: SaleSchema):
-        with SessionLocal() as session:
-            """
-            db_item: Item = session.query(Item).filter(Item.id == item_id).first()
-            db_item.name = item.name
-            db_item.price = item.price
-            db_item.purchase_price = item.purchase_price
-            db_item.purchase_date = item.purchase_date
-            db_item.tax = item.tax
-            db_item.location = item.location
-            db_item.expiration_date = item.expiration_date
-            session.commit()
-            session.refresh(db_item)
-            return db_item
-            """
-            # TODO: fix update_client functionality
-            pass
+    def update_sale(self, sale_id: int, sale: Sale):
+        db_sale: Sale = self.db.query(Sale).filter(Sale.id == sale_id).first()
+
+        if sale.id_item != None:
+            db_sale.id_item = sale.id_item
+
+        if sale.id_client != None:
+            db_sale.id_client = sale.id_client
+
+        if sale.amount != None:
+            db_sale.amount = sale.amount
+
+        if sale.sale_date != None:
+            db_sale.sale_date = sale.sale_date
+
+        self.db.commit()
+        self.db.refresh(db_sale)
+        return db_sale
 
     def delete_sale(self, sale_id: int) -> None:
         with SessionLocal() as session:
