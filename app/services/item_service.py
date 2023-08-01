@@ -17,7 +17,7 @@ class ItemService:
     def get_item_by_id(self, item_id: int) -> ItemSchema:
         return self.item_repository.get_item_by_id(item_id)
 
-    def create_item(self, item: ItemSchema) -> Item:
+    def create_item(self, item: ItemSchema) -> ItemSchema:
         item_db = Item(**ItemMapper.to_db(item))
         return self.item_repository.create_item(item_db)
 
