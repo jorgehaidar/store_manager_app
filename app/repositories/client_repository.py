@@ -45,6 +45,5 @@ class ClientRepository:
         return db_client
 
     def delete_item(self, client_id: int) -> None:
-        with SessionLocal() as session:
-            session.query(Client).filter(Client.id == client_id).delete()
-            session.commit()
+        self.db.query(Client).filter(Client.id == client_id).delete()
+        self.db.commit()
