@@ -4,13 +4,17 @@ from fastapi import APIRouter, Depends
 from app.schema.sale_schema import SaleSchema
 from app.repositories.sale_repository import SaleRepository
 from app.services.sale_service import SaleService
+from app.db.database import get_db
+from sqlalchemy.orm import Session
 
 router = APIRouter()
 
 
 @router.get("/sales")
-async def read_sales(sale_repository: SaleRepository = Depends()):
-    return await sale_repository.get_sales()
+async def read_sales(db: Session = Depends(get_db)):
+    sale_repository = SaleRepository(db)
+    sale_service = SaleService(sale_repository)
+    return await sale_service.get_sales()
 
 
 @router.get("/sales/{sale_id}", response_model=SaleSchema)
