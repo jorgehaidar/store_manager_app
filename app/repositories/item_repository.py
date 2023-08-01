@@ -11,8 +11,9 @@ class ItemRepository:
         self.db = db
 
     async def get_items(self) -> List:
-        with SessionLocal() as session:
-            return session.query(Item).all()
+        return self.db.query(Item).all()
+        #with SessionLocal() as session:
+        #    return session.query(Item).all()
 
     def get_item_by_id(self, item_id: int):
         with SessionLocal() as session:
