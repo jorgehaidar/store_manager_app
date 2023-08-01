@@ -17,10 +17,12 @@ async def read_items(db: Session = Depends(get_db)):
     return await item_service.get_items()
 
 
-# @router.get("/items/{item_id}", response_model=ItemSchema)
-# async def read_item(item_id: int, item_repository: ItemRepository = Depends()):
-#     return item_repository.get_item_by_id(item_id=item_id)
-#
+@router.get("/items/{item_id}")
+async def read_item(item_id: int, db: Session = Depends(get_db)):
+    item_repository = ItemRepository(db)
+    item_service = ItemService(item_repository)
+    return item_service.get_item_by_id(item_id=item_id)
+
 #
 # @router.post("/items", response_model=ItemSchema)
 # async def create_item(item: ItemSchema, item_repository: ItemRepository = Depends()):
