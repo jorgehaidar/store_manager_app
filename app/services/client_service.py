@@ -17,12 +17,13 @@ class ClientService:
     def get_client_by_id(self, client_id: int) -> ClientSchema:
         return self.client_repository.get_client_by_id(client_id)
 
-    def create_client(self, client: ClientSchema) -> Client:
+    def create_client(self, client: ClientSchema) -> ClientSchema:
         client_db = Client(**ClientMapper.to_db(client))
         return self.client_repository.create_client(client_db)
 
-    def update_client(self, client_id: int, client: ClientSchema) -> Client:
-        return self.client_repository.update_client(client_id, client)
+    def update_client(self, client_id: int, client: ClientSchema) -> ClientSchema:
+        db_sale = self.client_repository.update_client(client_id, client)
+        return ClientMapper.to_entity(db_sale)
 
     def delete_client(self, client_id: int) -> None:
         return self.client_repository.delete_client(client_id)
