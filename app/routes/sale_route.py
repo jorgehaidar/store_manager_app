@@ -24,9 +24,11 @@ async def read_sale(sale_id: int, db: Session = Depends(get_db)):
     return sale_service.get_sale_by_id(sale_id=sale_id)
 
 
-@router.post("/sales", response_model=SaleSchema)
-async def create_sale(sale: SaleSchema, sale_repository: SaleRepository = Depends()):
-    return sale_repository.create_sale(sale=sale)
+@router.post("/sales")
+async def create_sale(sale: SaleSchema, db: Session = Depends(get_db)):
+    sale_repository = SaleRepository(db)
+    sale_service = SaleService(sale_repository)
+    return sale_service.create_sale(sale=sale)
 
 
 @router.put("/sales/{sale_id}", response_model=SaleSchema)
