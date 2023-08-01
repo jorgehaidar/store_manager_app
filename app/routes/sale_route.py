@@ -31,9 +31,11 @@ async def create_sale(sale: SaleSchema, db: Session = Depends(get_db)):
     return sale_service.create_sale(sale=sale)
 
 
-@router.put("/sales/{sale_id}", response_model=SaleSchema)
-async def update_sale(sale_id: int, sale: SaleSchema, sale_repository: SaleRepository = Depends()):
-    return sale_repository.update_sale(sale_id=sale_id, sale=sale)
+@router.put("/sales/{sale_id}")
+async def update_sale(sale_id: int, sale: SaleSchema, db: Session = Depends(get_db)):
+    sale_repository = SaleRepository(db)
+    sale_service = SaleService(sale_repository)
+    return sale_service.update_sale(sale_id=sale_id, sale=sale)
 
 
 @router.delete("/sales/{sale_id}")
