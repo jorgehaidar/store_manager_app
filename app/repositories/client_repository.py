@@ -44,6 +44,6 @@ class ClientRepository:
         self.db.refresh(db_client)
         return db_client
 
-    def delete_item(self, client_id: int) -> None:
+    def delete_client(self, client_id: int) -> None:
         self.db.query(Client).filter(Client.id == client_id).delete()
         self.db.commit()
