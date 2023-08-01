@@ -21,8 +21,9 @@ class ItemService:
         item_db = Item(**ItemMapper.to_db(item))
         return self.item_repository.create_item(item_db)
 
-    def update_item(self, item_id: int, item: ItemSchema) -> Item:
-        return self.item_repository.update_item(item_id, item)
+    def update_item(self, item_id: int, item: ItemSchema) -> ItemSchema:
+        db_item: Item = self.item_repository.update_item(item_id, item)
+        return ItemMapper.to_entity(db_item)
 
     def delete_item(self, item_id: int) -> None:
         return self.item_repository.delete_item(item_id)
