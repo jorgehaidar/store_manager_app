@@ -39,6 +39,8 @@ async def update_sale(sale_id: int, sale: SaleSchema, db: Session = Depends(get_
 
 
 @router.delete("/sales/{sale_id}")
-async def delete_sale(sale_id: int, sale_repository: SaleRepository = Depends()):
-    sale_repository.delete_sale(sale_id=sale_id)
+async def delete_sale(sale_id: int, db: Session = Depends(get_db)):
+    sale_repository = SaleRepository(db)
+    sale_service = SaleService(sale_repository)
+    sale_service.delete_sale(sale_id=sale_id)
     return {"message": "Client deleted successfully."}
