@@ -3,9 +3,13 @@ from app.db.database import SessionLocal
 from app.models.item import Item
 from app.schema.item_schema import ItemSchema
 from app.mappers.item_mapper import ItemMapper
+from sqlalchemy.orm import Session
 
 
 class ItemRepository:
+    def __init__(self, db: Session):
+        self.db = db
+
     async def get_items(self) -> List:
         with SessionLocal() as session:
             return session.query(Item).all()
