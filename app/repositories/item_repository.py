@@ -51,6 +51,8 @@ class ItemRepository:
         #     return item
 
     def delete_item(self, item_id: int) -> None:
-        with SessionLocal() as session:
-            session.query(Item).filter(Item.id == item_id).delete()
-            session.commit()
+        self.db.query(Item).filter(Item.id == item_id).delete()
+        self.db.commit()
+        # with SessionLocal() as session:
+        #     session.query(Item).filter(Item.id == item_id).delete()
+        #     session.commit()
