@@ -31,11 +31,13 @@ async def create_item(item: ItemSchema, db: Session = Depends(get_db)):
     return item_service.create_item(item=item)
 
 
-# @router.put("/items/{item_id}", response_model=ItemSchema)
-# async def update_item(item_id: int, item: ItemSchema, item_repository: ItemRepository = Depends()):
-#     return item_repository.update_item(item_id=item_id, item=item)
-#
-#
+@router.put("/items/{item_id}")
+async def update_item(item_id: int, item: ItemSchema, db: Session = Depends(get_db)):
+    item_repository = ItemRepository(db)
+    item_service = ItemService(item_repository)
+    return item_service.update_item(item_id=item_id, item=item)
+
+
 # @router.delete("/items/{item_id}")
 # async def delete_item(item_id: int, item_repository: ItemRepository = Depends()):
 #     item_repository.delete_item(item_id=item_id)
