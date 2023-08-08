@@ -25,5 +25,5 @@ class ItemService:
         db_item: Item = self.item_repository.update_item(item_id, item)
         return ItemMapper.to_entity(db_item)
 
-    def delete_item(self, item_id: int) -> None:
+    def delete_item(self, item_id: int):
         return self.item_repository.delete_item(item_id)
